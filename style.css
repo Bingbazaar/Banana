@@ -12,14 +12,37 @@ body{
 
 input.username {
   width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #bbb;
+  border-bottom-width: 0px;
+  font-family: 'Raleway';
 }
 
 textarea {
   width: 100%;
+  padding: 10px;
+  border: 1px solid #BBB;
+  outline: none;
+  font: 20px 'Raleway';
+  max-width: 100%;
 }
 
 .chat-log {
   height: 500px;
   width: 100%;
-  border: 3px solid #333;
+  border: 1px solid #bbb;
+  padding: 10px;
+  border-bottom: none;
+  border-top: 1px solid #bbb;
+}
+
+h1.title {
+  text-align: center;
+  font-size: 50px;
+  margin: 20px;
+}
+
+span.message {
+  display: block;
 }

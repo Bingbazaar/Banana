@@ -1,7 +1,9 @@
 var app = require('http').createServer(handler),
-  io = require('socket.io')(8000).sockets,
+  io = require('socket.io')(app).sockets,
   fs = require('fs'),
-  path = require('path');
+  path = require('path'),
+  sanitize = require('google-caja').sanitize;
+
 
 //handler function for createServer method
 function handler(req, res){
@@ -37,10 +39,31 @@ function handler(req, res){
   });
 }
 
+function validate(string){
+  var message = sanitize(string);
+  return message;
+}
+
 //a user connects
 io.on('connection', function(socket){
   console.log('A user connected :D');
+
+  //a message is sent
+  socket.on('input', function(msg){
+    message = validate(msg.msg);
+    username = validate(msg.name);
+    socket.emit('output', {
+      msg: message,
+      name: username
+    });
+  });
+
+  //user disconnected
+  socket.on('disconnect', function(socket){
+    console.log('A user disconnected.');
+  });
 });
+
 
 app.listen(8080, function(){
   console.log('Server running on localhost:8080');
