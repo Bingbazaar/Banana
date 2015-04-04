@@ -1,0 +1,8 @@
+{
+  "name": "Banana",
+  "version": "0.0.1",
+  "description": "Real-time chat using Node.js",
+  "dependencies": {
+    "socket.io": "^1.3.5"
+  }
+}
