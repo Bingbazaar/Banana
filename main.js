@@ -1,8 +1,9 @@
 var app = require('http').createServer(handler),
-  io = require('socket.io')(app).sockets,
+  io = require('socket.io')(app),
   fs = require('fs'),
   path = require('path'),
-  sanitize = require('google-caja').sanitize;
+  sanitize = require('google-caja').sanitize,
+  messages = [];
 
 
 //handler function for createServer method
@@ -44,18 +45,37 @@ function validate(string){
   return message;
 }
 
+function valid(name, message){
+  //remove whitespace
+  name = name.trim();
+  message = message.trim();
+
+  if(!name.length || !message.length) return false;
+  return true;
+}
+
 //a user connects
 io.on('connection', function(socket){
   console.log('A user connected :D');
 
+  var output = '';
+  for(x = 0; x < messages.length; x++){
+    output += messages[x];
+  }
+
+  socket.emit('join', output);
+
   //a message is sent
   socket.on('input', function(msg){
-    message = validate(msg.msg);
+    var message = validate(msg.msg),
     username = validate(msg.name);
-    socket.emit('output', {
-      msg: message,
-      name: username
-    });
+    if(valid(username, message)){
+      io.emit('output', {
+        msg: message,
+        name: username
+      });
+      messages.push('<span class="message">' + username + ': ' + message + '</span>');
+    }
   });
 
   //user disconnected

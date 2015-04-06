@@ -23,7 +23,7 @@
     messages = getNode('.chat');
 
 
-    // if(socket !== undefined){
+    if(socket !== undefined){
     $('.chat textarea').keypress(function(event){
       var self = this,
         name = $('.username').val();
@@ -35,15 +35,20 @@
         });
         event.preventDefault();
         $('.chat textarea').val('');
+        return false;
       }
     });
 
-      socket.on('output', function(data){
-        if(data){
-          $('.chat-log').append('<span class="message">' + data.name + ': ' +data.msg + '</span>');
-        }
+    socket.on('output', function(data){
+      if(data){
+        $('.chat-log').append('<span class="message">' + data.name + ': ' +data.msg + '</span>');
+      }
+    });
+
+      socket.on('join', function(messages){
+        $('.chat-log').append(messages);
       });
-    // }
+    }
   });
 
   </script>
