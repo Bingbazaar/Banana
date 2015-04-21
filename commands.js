@@ -9,7 +9,7 @@ var commands = exports.commands = {
   exit: function(){
     io.emit('serverdown');
     process.exit();
-  },
+  }
 
   // admin: function(string, user, socket){
   //   fs.readFile('./ranks.csv', function(err, data){
