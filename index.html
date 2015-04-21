@@ -4,53 +4,26 @@
   <meta charset="UTF-8">
   <title>Banana</title>
   <link rel="stylesheet" href="style.css">
+  <!--  Uncomment the line under this one for a new design-->
+  <!-- <link rel="stylesheet" href="resources/gray-style.css"> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  <script src="app.js"></script>
+  <script src="controller.js"></script>
+  <script src="client.js"></script>
 </head>
 <body>
+  <div class="background">
   <h1 class="title">Banana</h1>
   <div class="chat">
     <input type="text" class="username" placeholder="Username">
-    <div class="chat-log"></div>
+    <div class="chat-log">
+      <span class="typing"></span>
+    </div>
     <textarea></textarea>
+    <!-- <button class="signup">Sign up</button> -->
   </div>
   <script src="/socket.io/socket.io.js"></script>
-  <script>
-  $(function(){
-    var socket = io();
-    var getNode = function(string){
-      return document.querySelector(string);
-    },
-    messages = getNode('.chat');
-
-
-    if(socket !== undefined){
-    $('.chat textarea').keypress(function(event){
-      var self = this,
-        name = $('.username').val();
-      var username = getNode('.username').value;
-      if(event.which == 13 && !event.shiftKey){
-        socket.emit('input', {
-          name: name,
-          msg: self.value
-        });
-        event.preventDefault();
-        $('.chat textarea').val('');
-        return false;
-      }
-    });
-
-    socket.on('output', function(data){
-      if(data){
-        $('.chat-log').append('<span class="message">' + data.name + ': ' +data.msg + '</span>');
-      }
-    });
-
-      socket.on('join', function(messages){
-        $('.chat-log').append(messages);
-      });
-    }
-  });
-
-  </script>
+  </div>
 </body>
 </html>

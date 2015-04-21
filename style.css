@@ -8,6 +8,7 @@ body{
 .chat {
   max-width: 700px;
   margin: 0 auto;
+
 }
 
 input.username {
@@ -35,6 +36,8 @@ textarea {
   padding: 10px;
   border-bottom: none;
   border-top: 1px solid #bbb;
+  overflow: auto;
+  position: relative;
 }
 
 h1.title {
@@ -45,4 +48,50 @@ h1.title {
 
 span.message {
   display: block;
+}
+
+span.username {
+  font-weight: bold;
+  text-shadow: 0px 1px 1px #333;
+}
+
+input.username {
+  border-bottom-width: 0px;
+  background: transparent;
+}
+
+span.notice {
+  color: darkgrey;
+  font-style: italic;
+  display: block;
+}
+
+span.typing {
+  position: absolute;
+  bottom: 0;
+  color: darkgrey;
+  font-style: italic;
+}
+
+button.signup {
+  height: 50px;
+  width: 150px;
+  font-size: 30px;
+  background: transparent;
+  color: rgb(228, 241, 255);
+  border: 1px solid #FF3C86;
+  border-radius: 5px;
+  outline: none;
+  border-bottom-width: 3px;
+  transition: text-shadow 0.2s ease, box-shadow 0.3s ease;
+}
+
+button.signup:hover {
+  text-shadow: 0 0 17px rgba(210, 234, 255, 0.55);
+  box-shadow: 0 0 10px rgba(255, 205, 224, 0.72);
+}
+
+button.signup:active {
+  box-shadow: 0 0 10px rgba(255, 205, 224, 0.33);
+  text-shadow: 0 0 17px rgba(210, 234, 255, 0.33);
 }
